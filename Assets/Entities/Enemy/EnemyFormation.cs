@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBehaviour : MonoBehaviour
+public class EnemyFormation : MonoBehaviour
 {
     public GameObject projectile;
     public float projectileSpeed = 5f;

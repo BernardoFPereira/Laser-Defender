@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class FormationController : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public float width = 10f;
