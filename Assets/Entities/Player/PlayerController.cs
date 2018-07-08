@@ -16,6 +16,27 @@ public class PlayerController : MonoBehaviour
     float xMin;
     float xMax;
 
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        Projectile missile = collider.gameObject.GetComponent<Projectile>();
+        if (missile)
+        {
+            health -= missile.GetDamage();
+            missile.Hit();
+            if (health <= 0f)
+            {
+                Die();
+            }
+            Debug.Log("Player hit!");
+        }
+    }
+
+    void Die()
+    {
+        FindObjectOfType<SceneLoader>().LoadScene("Win Screen");
+        Destroy(gameObject);
+    }
+
     void Start()
     {
         float distance = transform.position.z - Camera.main.transform.position.z;
@@ -57,20 +78,4 @@ public class PlayerController : MonoBehaviour
         float xNew = Mathf.Clamp(transform.position.x, xMin, xMax);
         transform.position = new Vector3(xNew, transform.position.y, transform.position.z);
 	}
-
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        Projectile missile = collider.gameObject.GetComponent<Projectile>();
-        if (missile)
-        {
-            health -= missile.GetDamage();
-            missile.Hit();
-            if (health <= 0f)
-            {
-                Destroy(gameObject);
-            }
-            Debug.Log("Player hit!");
-        }
-    }
-
 }

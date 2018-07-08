@@ -8,12 +8,13 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadScene(string name)
     {
-        Debug.Log("New level Load: " + name);
+        Debug.Log("New scene Load: " + name);
         SceneManager.LoadScene(name);
     }
 
     public void LoadNextScene()
     {
+        Debug.Log("Next scene loaded.");
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex + 1);
     }
@@ -32,5 +33,4 @@ public class SceneLoader : MonoBehaviour
     {
         LoadNextScene();
     }
-
 }
