@@ -8,6 +8,14 @@ public class EnemyFormation : MonoBehaviour
     public float projectileSpeed = 5f;
     public float health = 150f;
     public float shotsPerSeconds = 0.5f;
+    public int scoreValue = 150;
+
+    private ScoreKeeper scoreKeeper;
+
+    void Start()
+    {
+        scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
+    }
 
 
     void Update()
@@ -36,6 +44,7 @@ public class EnemyFormation : MonoBehaviour
             if (health <= 0f)
             {
                 Destroy(gameObject);
+                scoreKeeper.Score(scoreValue);
             }
         }
     }

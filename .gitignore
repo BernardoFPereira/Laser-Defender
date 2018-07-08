@@ -15,4 +15,7 @@ Assets/TextMesh Pro
 *.cs.meta
 *.png
 *.prefab
+*.anim
+*.controller
+
 Temp/
