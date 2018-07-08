@@ -1,0 +1,17 @@
+Assets/Fonts/
+Assets/Scenes/
+Assets/Sounds/
+Assets/TextMesh Pro
+/.vs
+/Library
+/Obj
+/Packages
+/ProjectSettings
+
+
+*.csproj
+*.sln
+*.meta
+*.cs.meta
+*.png
+*.prefab
