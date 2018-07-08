@@ -33,8 +33,7 @@ public class EnemyFormation : MonoBehaviour
 
     void Fire()
     {
-        Vector3 startPosition = transform.position + new Vector3(0, -1, 0);
-        GameObject enemyBeam = Instantiate(projectile, startPosition, Quaternion.identity) as GameObject;
+        GameObject enemyBeam = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
         enemyBeam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -projectileSpeed, 0);
         AudioSource.PlayClipAtPoint(shotSound, transform.position, shotVolume);
     }
