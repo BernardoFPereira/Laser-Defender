@@ -21,7 +21,12 @@ public class FormationController : MonoBehaviour
         Vector3 rightBoundary = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distanceToCamera));
         xMax = rightBoundary.x;
         xMin = leftBoundary.x;
+        EnemySpawn();
+    }
 
+
+    void EnemySpawn()
+    {
         foreach (Transform child in transform)
         {
             GameObject enemy = Instantiate(enemyPrefab, child.transform.position, Quaternion.identity);
@@ -56,5 +61,23 @@ public class FormationController : MonoBehaviour
         {
             movingRight = false;
         }
+
+        if(AllMembersDead())
+        {
+            EnemySpawn();
+            Debug.Log("Enemy received reinforcements!");
+        }
+    }
+
+    bool AllMembersDead()
+    {
+        foreach (Transform childPositionGameObject in transform)
+        {
+            if(childPositionGameObject.childCount > 0)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
