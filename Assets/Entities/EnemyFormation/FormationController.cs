@@ -8,6 +8,7 @@ public class FormationController : MonoBehaviour
     public float width = 10f;
     public float height = 5f;
     public float speed = 1f;
+    public float spawnDelay = 0.5f;
 
     private bool movingRight = true;
     private float xMax;
@@ -21,7 +22,7 @@ public class FormationController : MonoBehaviour
         Vector3 rightBoundary = Camera.main.ViewportToWorldPoint(new Vector3(1, 0, distanceToCamera));
         xMax = rightBoundary.x;
         xMin = leftBoundary.x;
-        EnemySpawn();
+        SpawnUntilFull();
     }
 
 
@@ -31,6 +32,20 @@ public class FormationController : MonoBehaviour
         {
             GameObject enemy = Instantiate(enemyPrefab, child.transform.position, Quaternion.identity);
             enemy.transform.parent = child;
+        }
+    }
+
+    void SpawnUntilFull()
+    {
+        Transform freePosition = NextFreePosition();
+        if (freePosition)
+        {
+            GameObject enemy = Instantiate(enemyPrefab, freePosition.position, Quaternion.identity);
+            enemy.transform.parent = freePosition;
+        }
+        if (NextFreePosition())
+        {
+            Invoke("SpawnUntilFull", spawnDelay);
         }
     }
 
@@ -64,7 +79,7 @@ public class FormationController : MonoBehaviour
 
         if(AllMembersDead())
         {
-            EnemySpawn();
+            SpawnUntilFull();
             Debug.Log("Enemy received reinforcements!");
         }
     }
@@ -80,4 +95,17 @@ public class FormationController : MonoBehaviour
         }
         return true;
     }
+
+    Transform NextFreePosition()
+    {
+        foreach (Transform childPositionGameObject in transform)
+        {
+            if (childPositionGameObject.childCount == 0)
+            {
+                return childPositionGameObject;
+            }
+        }
+        return null;
+    }
+
 }
