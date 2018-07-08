@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //accessible in the inspector
     public float speed = 15.0f;
     public float padding = 1f;
     public GameObject projectile;
@@ -73,7 +74,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += Vector3.right * speed * Time.deltaTime;
         }
-       
+
         //restrict player to gamespace
         float xNew = Mathf.Clamp(transform.position.x, xMin, xMax);
         transform.position = new Vector3(xNew, transform.position.y, transform.position.z);
