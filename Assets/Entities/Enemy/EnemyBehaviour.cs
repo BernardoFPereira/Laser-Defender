@@ -5,18 +5,25 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
     public GameObject projectile;
-    public float health = 150f;   
     public float projectileSpeed = 5f;
+    public float health = 150f;
+    public float shotsPerSeconds = 0.5f;
 
 
     void Update()
     {
-        Vector3 startPosition = transform.position + new Vector3(0, -1, 0);
-        if (Input.GetKeyDown(KeyCode.Z))
+        float probability = Time.deltaTime * shotsPerSeconds;
+        if (Random.value < probability)
         {
-            GameObject enemyBeam = Instantiate(projectile, startPosition, Quaternion.identity) as GameObject;
-            enemyBeam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -projectileSpeed, 0);
+            Fire();
         }
+    }
+
+    void Fire()
+    {
+        Vector3 startPosition = transform.position + new Vector3(0, -1, 0);
+        GameObject enemyBeam = Instantiate(projectile, startPosition, Quaternion.identity) as GameObject;
+        enemyBeam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -projectileSpeed, 0);
     }
 
     void OnTriggerEnter2D(Collider2D collider)
